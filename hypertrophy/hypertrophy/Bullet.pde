@@ -5,6 +5,19 @@ class Bullet extends GameObject
   {
     super(width * 0.5f, height * 0.5f, 5);
     speed = 5.0f;
+    theta = getTheta();
+    //Adjusting start position of each bullet based on radius of player (which can increase)
+    for(int i=gameObjects.size()-1; i>=0; i--)
+    {
+      GameObject go = gameObjects.get(i);
+      if(go instanceof Player)
+      {
+        forward.x = sin(theta);
+        forward.y = - cos(theta);
+        forward.mult(go.r);
+        pos.add(forward);
+      }
+    }
   }
   
   void update()

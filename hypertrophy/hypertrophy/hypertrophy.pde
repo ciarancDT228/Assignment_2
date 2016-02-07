@@ -43,6 +43,5 @@ void draw()
 void mousePressed()
 {
   Bullet bullet = new Bullet();
-  bullet.theta = bullet.getTheta();
   gameObjects.add(bullet);
 }
