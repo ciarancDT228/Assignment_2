@@ -52,6 +52,10 @@ class Target extends GameObject
           {
             if(go.pos.dist(go2.pos) < go2.r)
             {
+              AudioPlayer audio;
+              audio = minim.loadFile("impact.wav");
+              audio.rewind();
+              audio.play();
               gameObjects.remove(this);
               go2.d+=10;
             }//end if

@@ -1,6 +1,7 @@
 import ddf.minim.*;
 Minim minim;
-AudioPlayer audio;
+
+
 void setup()
 {
   minim = new Minim(this);
@@ -65,8 +66,12 @@ void checkCollisions()
         {
           if(go.pos.dist(go2.pos)<5)
           {
+            AudioPlayer audio;
+            audio = minim.loadFile("pop.wav");
             gameObjects.remove(go);
             gameObjects.remove(go2);
+            audio.rewind();
+            audio.play();
             break;
           }//end if collision
         }//end if bullet
