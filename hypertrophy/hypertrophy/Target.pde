@@ -1,5 +1,6 @@
 class Target extends GameObject
 {
+  AudioPlayer audio;
   
   Target()
   {
@@ -8,12 +9,13 @@ class Target extends GameObject
     forward.y = - cos(theta);
     pos.x = width*0.5f;
     pos.y = height*0.5f;
-    forward.mult(width*0.4f);
+    forward.mult(width*0.6f);
     pos.add(forward);
     d = 3;
     c = color(255);
     forward.normalize();
     speed = 0.5f;
+    audio = minim.loadFile("impact.wav");
   }
   
   void render()
@@ -52,8 +54,6 @@ class Target extends GameObject
           {
             if(go.pos.dist(go2.pos) < go2.r)
             {
-              AudioPlayer audio;
-              audio = minim.loadFile("impact.wav");
               audio.rewind();
               audio.play();
               gameObjects.remove(this);

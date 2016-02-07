@@ -1,8 +1,5 @@
 class Bullet extends GameObject
 {
-  AudioPlayer audio;
-  
-  
   Bullet()
   {
     super(width * 0.5f, height * 0.5f, 5);
@@ -20,9 +17,6 @@ class Bullet extends GameObject
         pos.add(forward);
       }
     }//end for
-    audio = minim.loadFile("shoot1.wav");
-    audio.rewind();
-    audio.play();
   }
   
   void update()

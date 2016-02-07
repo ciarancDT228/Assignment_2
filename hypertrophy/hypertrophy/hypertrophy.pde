@@ -1,6 +1,7 @@
 import ddf.minim.*;
 Minim minim;
-
+AudioPlayer shoot;
+AudioPlayer pop;
 
 void setup()
 {
@@ -11,6 +12,8 @@ void setup()
   fill(0);
   Player player = new Player();
   gameObjects.add(player);
+  shoot = minim.loadFile("shoot.wav");
+  pop = minim.loadFile("pop.wav");
 }
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
@@ -36,7 +39,7 @@ void draw()
     go.update();
     go.render();
   }
-  if(timer > 60)
+  if(timer > 30)
   {
     Target target = new Target();
     gameObjects.add(target);
@@ -44,12 +47,15 @@ void draw()
   }
   timer++;
   checkCollisions();
+  println(gameObjects.size());
 }//end for loop
 
 void mousePressed()
 {
   Bullet bullet = new Bullet();
   gameObjects.add(bullet);
+  shoot.rewind();
+  shoot.play();
 }
 
 void checkCollisions()
@@ -66,12 +72,10 @@ void checkCollisions()
         {
           if(go.pos.dist(go2.pos)<5)
           {
-            AudioPlayer audio;
-            audio = minim.loadFile("pop.wav");
             gameObjects.remove(go);
             gameObjects.remove(go2);
-            audio.rewind();
-            audio.play();
+            pop.rewind();
+            pop.play();
             break;
           }//end if collision
         }//end if bullet
