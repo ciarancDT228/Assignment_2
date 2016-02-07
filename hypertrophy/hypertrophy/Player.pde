@@ -21,11 +21,11 @@ class Player extends GameObject
     //Check the mouse is on the screen
     if(mouseX>0 && mouseY>0)
     {
-      o = Math.abs(mouseX-pos.x);
-      a = Math.abs(mouseY-pos.y);
-      //theta = atan(o/a);
-      theta = atan2(o, a); 
-
+      //Calculate opposite and adjacent sides
+      o = mouseX-pos.x;
+      a = mouseY-pos.y;
+      //Find the angle from the cursor to the centre of the screen (pos)
+      theta = atan2(a, o) + HALF_PI;//Have to add half pi because the angle is off by 90 degrees for some reason
     }//end if on screen
   }//end update
   
@@ -37,7 +37,7 @@ class Player extends GameObject
     ellipse(0, 0, d, d);
     line(0, 0-halfR, 0, 0-halfR-r);
     popMatrix();
-    println(o);
+    println(pos.x);
   }
   
 }
