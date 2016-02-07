@@ -12,9 +12,11 @@ ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
 void draw()
 {
+  background(0);
   for(int i=gameObjects.size()-1; i>=0; i--)
   {
     GameObject go = gameObjects.get(i);
+    go.update();
     go.render();
   }
 }//end for loop
