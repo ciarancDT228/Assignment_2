@@ -48,11 +48,10 @@ class Target extends GameObject
           GameObject go2 = gameObjects.get(j);
           if(go2 instanceof Player)
           {
-            println("Player found");
             if(go.pos.dist(go2.pos) < go2.r)
             {
               gameObjects.remove(this);
-              go2.d++;
+              go2.d+=10;
             }//end if
           }//end if
         }//end for

@@ -2,7 +2,7 @@ class Player extends GameObject
 {
   Player()
   {
-    super(width * 0.5f, height * 0.5f, 20);
+    super(width * 0.5f, height * 0.5f, 90);
     c = color(255);
   }
   
@@ -14,6 +14,7 @@ class Player extends GameObject
   void update()
   {
     theta = getTheta();
+    r=d*0.5f;
   }//end update
   
   void render()
