@@ -18,6 +18,8 @@ class Player extends GameObject
   
   void render()
   {
+    ellipse(pos.x, pos.y, d, d);
+    line(pos.x, pos.y-halfR, pos.x, pos.y-halfR-r);
   }
   
 }

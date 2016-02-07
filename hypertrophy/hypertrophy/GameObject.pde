@@ -6,6 +6,7 @@ abstract class GameObject
   float theta = 0.0f;
   float d;//diameter
   float r;//radius
+  float halfR;
   float speed;
   color c;
   
@@ -20,6 +21,7 @@ abstract class GameObject
     forward = new PVector(0,-1);
     this.d = d;
     r = d * 0.5f;
+    halfR = r * 0.5f;
     theta = 0.0f;
   }//end constructor
   
