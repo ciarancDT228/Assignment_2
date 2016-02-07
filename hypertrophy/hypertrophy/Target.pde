@@ -8,7 +8,7 @@ class Target extends GameObject
     forward.y = - cos(theta);
     pos.x = width*0.5f;
     pos.y = height*0.5f;
-    forward.mult(width*0.7f);
+    forward.mult(width*0.4f);
     pos.add(forward);
     d = 3;
     c = color(255);
@@ -34,6 +34,8 @@ class Target extends GameObject
     checkTargetDist();
   }
   
+  //This method checks if the target has hit the outside of the player circle
+  //If it does hit, the circle grows and the target is deleted
   void checkTargetDist()
   {
     //Loop through array of gameObjects to find target objects
@@ -55,7 +57,6 @@ class Target extends GameObject
             }//end if
           }//end if
         }//end for
-        
       }//end if
     }//end for
   }//end checkTargetDist

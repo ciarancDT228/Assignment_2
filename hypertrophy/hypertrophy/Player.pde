@@ -2,7 +2,7 @@ class Player extends GameObject
 {
   Player()
   {
-    super(width * 0.5f, height * 0.5f, 90);
+    super(width * 0.5f, height * 0.5f, 10);
     c = color(255);
   }
   

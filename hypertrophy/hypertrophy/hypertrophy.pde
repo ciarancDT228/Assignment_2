@@ -1,5 +1,9 @@
+import ddf.minim.*;
+Minim minim;
+AudioPlayer audio;
 void setup()
 {
+  minim = new Minim(this);
   size(500,500);
   background(0);
   stroke(255);
@@ -38,6 +42,7 @@ void draw()
     timer = 0;
   }
   timer++;
+  checkCollisions();
 }//end for loop
 
 void mousePressed()
@@ -45,3 +50,27 @@ void mousePressed()
   Bullet bullet = new Bullet();
   gameObjects.add(bullet);
 }
+
+void checkCollisions()
+{
+  for(int i=gameObjects.size()-1;i>=0;i--)
+  {
+    GameObject go = gameObjects.get(i);
+    if(go instanceof Target)
+    {
+      for(int j=gameObjects.size()-1;j>=0;j--)
+      {
+        GameObject go2 = gameObjects.get(j);
+        if(go2 instanceof Bullet)
+        {
+          if(go.pos.dist(go2.pos)<5)
+          {
+            gameObjects.remove(go);
+            gameObjects.remove(go2);
+            break;
+          }//end if collision
+        }//end if bullet
+      }//end for j
+    }//end if target
+  }//end for i
+}//end checkCollisions
