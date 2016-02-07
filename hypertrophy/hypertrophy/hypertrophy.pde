@@ -32,9 +32,11 @@ void draw()
   }
 }//end for loop
 
-void mouseClicked()
+void mousePressed()
 {
   Bullet bullet = new Bullet();
   bullet.theta = bullet.getTheta();
   gameObjects.add(bullet);
+  Target target = new Target();
+  gameObjects.add(target);
 }

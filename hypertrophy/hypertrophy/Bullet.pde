@@ -4,7 +4,7 @@ class Bullet extends GameObject
   Bullet()
   {
     super(width * 0.5f, height * 0.5f, 5);
-    speed = 1.0f;
+    speed = 5.0f;
   }
   
   void update()
@@ -13,6 +13,11 @@ class Bullet extends GameObject
     forward.y = - cos(theta);
     forward.mult(speed);
     pos.add(forward);
+    //Garbage collection
+    if(pos.x<0 || pos.y<0 || pos.x>width || pos.y>height)
+    {
+      gameObjects.remove(this);
+    }
   }
   
   void render()
