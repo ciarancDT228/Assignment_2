@@ -28,4 +28,19 @@ abstract class GameObject
   abstract void update();
   abstract void render();
   
+  float getTheta()
+  {
+    //Check the mouse is on the screen
+    if(mouseX>0 && mouseY>0)
+    {
+      float o,a;
+      //Calculate opposite and adjacent sides
+      o = mouseX-pos.x;
+      a = mouseY-pos.y;
+      //Find the angle from the cursor to the centre of the screen (pos)
+      theta = atan2(a, o) + HALF_PI;//Have to add half pi because the angle is off by 90 degrees for some reason
+    }//end if on screen
+    return (float)theta;
+  }
+  
 }//end class

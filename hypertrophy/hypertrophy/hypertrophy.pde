@@ -9,6 +9,17 @@ void setup()
 }
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+/*boolean[] keys = new boolean[512];
+
+void keyPressed()
+{
+  keys[keyCode] = true;
+}
+
+void keyReleased()
+{
+  keys[keyCode] = false;
+}*/
 
 void draw()
 {
@@ -20,3 +31,10 @@ void draw()
     go.render();
   }
 }//end for loop
+
+void mouseClicked()
+{
+  Bullet bullet = new Bullet();
+  bullet.theta = bullet.getTheta();
+  gameObjects.add(bullet);
+}
