@@ -9,6 +9,7 @@ void setup()
 }
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+int timer = 0;
 /*boolean[] keys = new boolean[512];
 
 void keyPressed()
@@ -30,6 +31,13 @@ void draw()
     go.update();
     go.render();
   }
+  if(timer > 60)
+  {
+    Target target = new Target();
+    gameObjects.add(target);
+    timer = 0;
+  }
+  timer++;
 }//end for loop
 
 void mousePressed()
@@ -37,6 +45,5 @@ void mousePressed()
   Bullet bullet = new Bullet();
   bullet.theta = bullet.getTheta();
   gameObjects.add(bullet);
-  Target target = new Target();
-  gameObjects.add(target);
+  
 }
