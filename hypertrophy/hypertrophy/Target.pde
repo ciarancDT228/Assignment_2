@@ -8,7 +8,7 @@ class Target extends GameObject
     forward.y = - cos(theta);
     pos.x = width*0.5f;
     pos.y = height*0.5f;
-    forward.mult(100);
+    forward.mult(width*0.7f);
     pos.add(forward);
     d = 3;
     c = color(255);
@@ -24,7 +24,6 @@ class Target extends GameObject
     stroke(c);
     ellipse(0, 0, d, d);
     popMatrix();
-    println("Target");
   }
   
   void update()
@@ -32,6 +31,34 @@ class Target extends GameObject
     forward.mult(speed);
     pos.sub(forward);
     forward.normalize();
+    checkTargetDist();
   }
+  
+  void checkTargetDist()
+  {
+    //Loop through array of gameObjects to find target objects
+    for(int i=gameObjects.size()-1; i>=0; i--)
+    {
+      GameObject go = gameObjects.get(i);
+      if(go instanceof Target)
+      {
+        //Loop through array of gameObjects to find Player object
+        for(int j=gameObjects.size()-1; j>=0; j--)
+        {
+          GameObject go2 = gameObjects.get(j);
+          if(go2 instanceof Player)
+          {
+            println("Player found");
+            if(go.pos.dist(go2.pos) < go2.r)
+            {
+              gameObjects.remove(this);
+              go2.d++;
+            }//end if
+          }//end if
+        }//end for
+        
+      }//end if
+    }//end for
+  }//end checkTargetDist
   
 }//end class
