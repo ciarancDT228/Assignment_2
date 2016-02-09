@@ -1,4 +1,4 @@
-class Explode extends GameObject
+class Explode extends Target
 {
   
   void update()

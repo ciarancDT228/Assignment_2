@@ -1,6 +1,5 @@
 class Target extends GameObject
 {
-  AudioPlayer audio;
   float shine;
   
   Target()
@@ -16,7 +15,6 @@ class Target extends GameObject
     c = color(0,random(30,200),255);
     forward.normalize();
     speed = random(0.4f,0.6f);
-    audio = minim.loadFile("impact.wav");
     shine = d/5*2;
   }
   
@@ -46,37 +44,6 @@ class Target extends GameObject
     forward.mult(speed);
     pos.sub(forward);
     forward.normalize();
-    //checkTargetDist();
   }
-  
-  //This method checks if the target has hit the outside of the player circle
-  //If it does hit, the circle grows and the target is deleted
-  /*void checkTargetDist()
-  {
-    //Loop through array of gameObjects to find target objects
-    for(int i=gameObjects.size()-1; i>=0; i--)
-    {
-      GameObject go = gameObjects.get(i);
-      if(go instanceof Target)
-      {
-        //Loop through array of gameObjects to find Player object
-        for(int j=gameObjects.size()-1; j>=0; j--)
-        {
-          GameObject go2 = gameObjects.get(j);
-          if(go2 instanceof Player)
-          {
-            if(go.pos.dist(go2.pos) < go2.r)
-            {
-              audio.rewind();
-              audio.play();
-              gameObjects.remove(this);
-              ((Player)go2).tempD+=10;
-              break;
-            }//end if
-          }//end if
-        }//end for
-      }//end if
-    }//end for
-  }//end checkTargetDist*/
   
 }//end class
