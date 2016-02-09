@@ -12,7 +12,7 @@ class Target extends GameObject
     forward.mult(width*0.6f);
     pos.add(forward);
     d = 3;
-    c = color(255);
+    c = color(0,random(0,150),243);
     forward.normalize();
     speed = 0.5f;
     audio = minim.loadFile("impact.wav");
