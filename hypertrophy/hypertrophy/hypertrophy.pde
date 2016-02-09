@@ -79,6 +79,7 @@ void checkCollisions()
         {
           if(go1.pos.dist(go2.pos)<go1.r)
           {
+            ((Target)go1).explode();
             gameObjects.remove(go1);
             removeBullet = true;
             bullet = go2;

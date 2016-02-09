@@ -46,4 +46,10 @@ class Target extends GameObject
     forward.normalize();
   }
   
+  void explode()
+  {
+    Explode explode = new Explode(pos.x, pos.y, c, d);
+    gameObjects.add(explode);
+  }
+  
 }//end class
