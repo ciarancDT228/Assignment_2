@@ -57,7 +57,7 @@ class Target extends GameObject
               audio.rewind();
               audio.play();
               gameObjects.remove(this);
-              go2.d+=10;
+              ((Player)go2).tempD+=10;
             }//end if
           }//end if
         }//end for
