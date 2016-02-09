@@ -3,6 +3,7 @@ Minim minim;
 AudioPlayer shoot;
 AudioPlayer pop;
 AudioPlayer audio;
+AudioPlayer soundTrack;
 
 void setup()
 {
@@ -16,11 +17,18 @@ void setup()
   shoot = minim.loadFile("shoot.wav");
   pop = minim.loadFile("pop.wav");
   audio = minim.loadFile("impact.wav");
+  audio.setGain(10);
+  soundTrack = minim.loadFile("tune1.mp3");
+  soundTrack.setGain(-6);
+  soundTrack.loop();
 }
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 int timer = 0;
+int gameTimer = 0;
+int elapsed = 0;
 boolean removeBullet = false;
+boolean gameOver = false;
 /*boolean[] keys = new boolean[512];
 
 void keyPressed()
@@ -36,30 +44,38 @@ void keyReleased()
 void draw()
 {
   background(0);
-  
-  if(timer > 30)
+  if(timer > 20)
   {
     Target target = new Target();
     gameObjects.add(target);
     timer = 0;
   }
   timer++;
+  gameTimer++;
+  elapsed++;
   checkCollisions();
   
-  for(int i=gameObjects.size()-1; i>=0; i--)
+  if(gameOver == false)
   {
-    GameObject go = gameObjects.get(i);
-    go.update();
-    go.render();
+    for(int i=gameObjects.size()-1; i>=0; i--)
+    {
+      GameObject go = gameObjects.get(i);
+      go.update();
+      go.render();
+    }
   }
 }//end for loop
 
 void mousePressed()
 {
-  Bullet bullet = new Bullet();
-  gameObjects.add(bullet);
-  shoot.rewind();
-  shoot.play();
+  if(elapsed > 12)
+  {
+    Bullet bullet = new Bullet();
+    gameObjects.add(bullet);
+    shoot.rewind();
+    shoot.play();
+    elapsed = 0;
+  }
 }
 
 void checkCollisions()
@@ -87,6 +103,11 @@ void checkCollisions()
         }//end if bullet
         if(go2 instanceof Player)
         {
+          if(go2.d>width || go2.d>height)
+          {
+            gameOver=true;
+            soundTrack.pause();
+          }
           if(go1.pos.dist(go2.pos) < go2.r)
           {
             audio.rewind();
