@@ -1,6 +1,7 @@
 class Target extends GameObject
 {
   float shine;
+  float red,green,blue;
   
   Target()
   {
@@ -12,7 +13,10 @@ class Target extends GameObject
     forward.mult(width*0.6f);
     pos.add(forward);
     d = 5;
-    c = color(0,random(30,200),255);
+    red = 0;
+    green = random(30,200);
+    blue = 255;
+    c = color(red,green,blue);
     forward.normalize();
     speed = random(0.4f,0.6f);
     shine = d/5*2;
@@ -48,7 +52,7 @@ class Target extends GameObject
   
   void explode()
   {
-    Explode explode = new Explode(pos.x, pos.y, c, d);
+    Explode explode = new Explode(pos.x, pos.y, red, green, blue, d);
     gameObjects.add(explode);
   }
   

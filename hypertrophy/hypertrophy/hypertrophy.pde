@@ -52,8 +52,6 @@ void draw()
     go.update();
     go.render();
   }
-  
-  println(gameObjects.size());
 }//end for loop
 
 void mousePressed()
@@ -97,6 +95,16 @@ void checkCollisions()
             ((Player)go2).tempD+=10;
           }//end if
         }//end if Player
+        if(go2 instanceof Explode)
+        {
+          if(go1.pos.dist(go2.pos) < go2.r)
+          {
+            ((Target)go1).explode();
+            gameObjects.remove(go1);
+            pop.rewind();
+            pop.play();
+          }
+        }//end if explode
       }//end for j
     }//end if target
   }//end for i
