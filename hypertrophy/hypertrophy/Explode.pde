@@ -2,6 +2,7 @@ class Explode extends GameObject
 {
   float finalD;
   float red,green,blue;
+  float inc;
   
   Explode(float x, float y, float r, float g, float b, float d)
   {
@@ -11,16 +12,30 @@ class Explode extends GameObject
     this.green = g;
     this.blue = b;
     this.d = d;
-    finalD = 50;
+    finalD = d*10;
     c = color(red,green,blue);
+    inc = 2.0f;
   }
   
+  Explode(float x, float y, float d)
+  {
+    pos.x = x;
+    pos.y = y;
+    this.d = d;
+    red = 0;
+    green = 0;
+    blue = 50;
+    finalD = width;
+    c = color(red,green,blue);
+    inc = 70.0f;
+  }
+
   void update()
   {
     r = d * 0.8f;
     if(d<finalD)
     {
-      d+=2.0f;
+      d+=inc;
     }
     else
     {

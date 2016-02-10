@@ -20,7 +20,11 @@ class Player extends GameObject
     r=d*0.5f;
     if(d<tempD)
     {
-      d+=1.0f;
+      d+=2.0f;
+      if(d>tempD)
+      {
+        d = tempD;
+      }
     }
   }//end update
   
@@ -35,5 +39,11 @@ class Player extends GameObject
     line(0, 0-halfR, 0, 0-halfR-r);
     popMatrix();
   }//end render
+  
+  void explode()
+  {
+    Explode explode = new Explode(pos.x, pos.y, d);
+    gameObjects.add(explode);
+  }
 
 }

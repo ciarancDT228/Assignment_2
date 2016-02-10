@@ -13,13 +13,13 @@ class Target extends GameObject
     pos.y = height*0.5f;
     forward.mult(width*0.6f);
     pos.add(forward);
-    d = 5;
+    d = random(5,10);
     red = 0;
     green = random(30,200);
     blue = 255;
     c = color(red,green,blue);
     forward.normalize();
-    speed = random(0.4f,0.8f);
+    speed = random(0.4f,1.2f);
     shine = d/5*2;
   }
   

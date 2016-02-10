@@ -76,7 +76,7 @@ void draw()
 
 void mousePressed()
 {
-  if(elapsed > 10)
+  if(elapsed > 12)
   {
     Bullet bullet = new Bullet();
     gameObjects.add(bullet);
@@ -122,6 +122,7 @@ void checkCollisions()
             audio.play();
             gameObjects.remove(go1);
             ((Player)go2).tempD+=(width/50);
+            ((Player)go2).explode();
           }//end if
         }//end if Player
         if(go2 instanceof Explode)
