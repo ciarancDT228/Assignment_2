@@ -1,3 +1,8 @@
+//Ciarán Carroll D15124233
+//Computer Science DT228/2
+
+//Music from http://ericskiff.com/music/
+//Sounds from https://www.freesound.org/
 import ddf.minim.*;
 Minim minim;
 AudioPlayer shoot;
