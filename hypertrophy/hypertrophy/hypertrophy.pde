@@ -11,26 +11,37 @@ void setup()
   fullScreen();
   //size(500,500);
   background(0);
-  stroke(255);
-  fill(0);
+  //Adding player object
   Player player = new Player();
   gameObjects.add(player);
+  //Instantiating audio files
   shoot = minim.loadFile("shoot.wav");
   pop = minim.loadFile("pop.wav");
   audio = minim.loadFile("impact.wav");
   audio.setGain(10);
-  soundTrack = minim.loadFile("tune1.mp3");
-  soundTrack.setGain(-100);//-6
+  soundTrack = minim.loadFile("tune2.mp3");
+  soundTrack.setGain(-100);
   soundTrack.loop();
 }
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+//Seperate arraylist for effects/particles, to make object loops more efficient
 ArrayList<GameObject> gameEffects = new ArrayList<GameObject>();
+//Timer to control rate of target spawning
 int timer = 0;
+//Keeps track of game time
 int gameTimer = 0;
+//Timer used to control weapon fire rate
 int elapsed = 0;
+//Counts the number of targets destroyed (by a bullet or by another target exploding)
+int destroyed = 0;
+//Boolean needed for removing a bullet object when a bullet hits a target
+//For some reason removing two objects at once inside a nested loop results in an outOfBounds sometimes...
 boolean removeBullet = false;
+//Flag to indicate whether game is over
 boolean gameOver = false;
+//Boolean used to count targets being destroyed. Have to use boolean to prevent same target getting counted twice
+boolean hit = false;
 /*boolean[] keys = new boolean[512];
 
 void keyPressed()
@@ -53,7 +64,6 @@ void draw()
     timer = 0;
   }
   timer++;
-  gameTimer++;
   elapsed++;
   checkCollisions();
   
@@ -71,7 +81,14 @@ void draw()
       go.update();
       go.render();
     }
+    gameTimer++;
+    fill(255);
+    text("Targets Destroyed : " + destroyed, width-130, height-10);
+    text("Time Elapsed : " + gameTimer/60, 10, height-10); 
   }
+  
+  GameObject star = new Star();
+  gameEffects.add(star);
 }//end for loop
 
 void mousePressed()
@@ -103,6 +120,7 @@ void checkCollisions()
           {
             ((Target)go1).explode();
             gameObjects.remove(go1);
+            hit=true;
             removeBullet = true;
             bullet = go2;
             pop.rewind();
@@ -131,6 +149,12 @@ void checkCollisions()
           {
             ((Target)go1).explode();
             gameObjects.remove(go1);
+            //Check what kind of explosion it is (there are 2 kinds, target exploding or player exploding)
+            //If the player is exploding then don't count the targets being destroyed
+            if(((Explode)go2).finalD != width * 1.5)
+            {
+              hit=true;
+            }
             pop.rewind();
             pop.play();
           }
@@ -142,5 +166,10 @@ void checkCollisions()
   {
     gameObjects.remove(bullet);
     removeBullet = false;
+  }
+  if(hit == true)
+  {
+    destroyed++;
+    hit=false;
   }
 }//end checkCollisions

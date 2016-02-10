@@ -30,7 +30,7 @@ class Player extends GameObject
   
   void render()
   {
-    noFill();
+    fill(0);
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(theta);
