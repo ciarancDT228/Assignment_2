@@ -2,19 +2,25 @@ class Explode extends GameObject
 {
   float finalD;
   float red,green,blue;
-  float inc;
+  float inc;//Speed at which the diameter expands
+  float dInc;//The gaps between each elipse being drawn (gradient of shading)
+  float levels;//the level of detail on the shading (number of elipses drawn per frame)
+  float colourDec;//Amount to decrement color in shading
   
   Explode(float x, float y, float r, float g, float b, float d)
   {
     pos.x = x;
     pos.y = y;
-    this.red = r;
-    this.green = g;
-    this.blue = b;
+    red = r;
+    green = g;
+    blue = b;
     this.d = d;
     finalD = d*10;
     c = color(red,green,blue);
+    levels = 20;
     inc = 2.0f;
+    dInc = d/levels;
+    colourDec = blue/levels;
   }
   
   Explode(float x, float y, float d)
@@ -23,11 +29,14 @@ class Explode extends GameObject
     pos.y = y;
     this.d = d;
     red = 0;
-    green = 0;
-    blue = 50;
-    finalD = width;
+    green = 255;
+    blue = 255;
+    finalD = width * 1.5f;
     c = color(red,green,blue);
-    inc = 70.0f;
+    levels = 5;
+    inc = 40.0f;
+    dInc = 50.0f;
+    colourDec = blue/levels;
   }
 
   void update()
@@ -46,19 +55,29 @@ class Explode extends GameObject
   void render()
   {
     float tempD = d;
-    float dInc = d/5.0f;
+    if(finalD != width * 1.5f)
+    {
+      dInc = d/levels;
+    }
     float tempG = green;
     float tempB = blue;
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(theta);
-    for(int i=0; i<5; i++)
+    for(int i=0; i<levels; i++)
     {
       c = color(red,tempG,tempB);
       stroke(c);
-      fill(c);
-      tempG-=50;
-      tempB-=50;
+      if(finalD != width*1.5f)
+      {
+        fill(c);
+      }
+      else
+      {
+        noFill();
+      }
+      tempG-=colourDec;
+      tempB-=colourDec;
       ellipse(0, 0, tempD, tempD);
       tempD-=dInc;
     }

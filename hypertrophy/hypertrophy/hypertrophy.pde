@@ -121,7 +121,7 @@ void checkCollisions()
             audio.rewind();
             audio.play();
             gameObjects.remove(go1);
-            ((Player)go2).tempD+=(width/50);
+            ((Player)go2).tempD+=(height/8);
             ((Player)go2).explode();
           }//end if
         }//end if Player

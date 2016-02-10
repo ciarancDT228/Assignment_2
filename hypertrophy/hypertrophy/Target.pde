@@ -20,6 +20,7 @@ class Target extends GameObject
     c = color(red,green,blue);
     forward.normalize();
     speed = random(0.4f,1.2f);
+    //speed = 10;
     shine = d/5*2;
   }
   
