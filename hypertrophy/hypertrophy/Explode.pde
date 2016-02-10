@@ -17,7 +17,7 @@ class Explode extends GameObject
     this.d = d;
     finalD = d*10;
     c = color(red,green,blue);
-    levels = 20;
+    levels = 6;
     inc = 2.0f;
     dInc = d/levels;
     colourDec = blue/levels;

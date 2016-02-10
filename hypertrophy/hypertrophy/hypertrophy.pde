@@ -20,7 +20,7 @@ void setup()
   audio = minim.loadFile("impact.wav");
   audio.setGain(10);
   soundTrack = minim.loadFile("tune1.mp3");
-  soundTrack.setGain(-6);
+  soundTrack.setGain(-100);//-6
   soundTrack.loop();
 }
 
