@@ -11,7 +11,7 @@ class Explode extends GameObject
     this.green = g;
     this.blue = b;
     this.d = d;
-    finalD = 30;
+    finalD = 50;
     c = color(red,green,blue);
   }
   

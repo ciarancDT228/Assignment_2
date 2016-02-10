@@ -8,7 +8,8 @@ AudioPlayer soundTrack;
 void setup()
 {
   minim = new Minim(this);
-  size(500,500);
+  fullScreen();
+  //size(500,500);
   background(0);
   stroke(255);
   fill(0);
@@ -24,6 +25,7 @@ void setup()
 }
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+ArrayList<GameObject> gameEffects = new ArrayList<GameObject>();
 int timer = 0;
 int gameTimer = 0;
 int elapsed = 0;
@@ -57,6 +59,12 @@ void draw()
   
   if(gameOver == false)
   {
+    for(int i=gameEffects.size()-1; i>=0; i--)
+    {
+      GameObject go = gameEffects.get(i);
+      go.render();
+      go.update();
+    }
     for(int i=gameObjects.size()-1; i>=0; i--)
     {
       GameObject go = gameObjects.get(i);
@@ -68,7 +76,7 @@ void draw()
 
 void mousePressed()
 {
-  if(elapsed > 12)
+  if(elapsed > 10)
   {
     Bullet bullet = new Bullet();
     gameObjects.add(bullet);
@@ -113,7 +121,7 @@ void checkCollisions()
             audio.rewind();
             audio.play();
             gameObjects.remove(go1);
-            ((Player)go2).tempD+=10;
+            ((Player)go2).tempD+=(width/50);
           }//end if
         }//end if Player
         if(go2 instanceof Explode)
