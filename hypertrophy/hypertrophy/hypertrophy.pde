@@ -8,8 +8,8 @@ AudioPlayer soundTrack;
 void setup()
 {
   minim = new Minim(this);
-  fullScreen();
-  //size(500,500);
+  //fullScreen();
+  size(500,500);
   background(0);
   //Adding player object
   Player player = new Player();
@@ -20,7 +20,7 @@ void setup()
   audio = minim.loadFile("impact.wav");
   audio.setGain(10);
   soundTrack = minim.loadFile("tune2.mp3");
-  soundTrack.setGain(-100);
+  soundTrack.setGain(-6);
   soundTrack.loop();
 }
 
@@ -57,23 +57,19 @@ void keyReleased()
 void draw()
 {
   background(0);
-  if(timer > 20)
+  for(int i=gameEffects.size()-1; i>=0; i--)
   {
-    Target target = new Target();
-    gameObjects.add(target);
-    timer = 0;
+    GameObject go = gameEffects.get(i);
+    go.render();
+    go.update();
   }
-  timer++;
-  elapsed++;
-  checkCollisions();
-  
   if(gameOver == false)
   {
-    for(int i=gameEffects.size()-1; i>=0; i--)
+    if(timer > 20)
     {
-      GameObject go = gameEffects.get(i);
-      go.render();
-      go.update();
+      Target target = new Target();
+      gameObjects.add(target);
+      timer = 0;
     }
     for(int i=gameObjects.size()-1; i>=0; i--)
     {
@@ -86,14 +82,20 @@ void draw()
     text("Targets Destroyed : " + destroyed, width-130, height-10);
     text("Time Elapsed : " + gameTimer/60, 10, height-10); 
   }
-  
+  else
+  {
+    gameOver();
+  }
+  timer++;
+  elapsed++;
+  checkCollisions();
   GameObject star = new Star();
   gameEffects.add(star);
 }//end for loop
 
 void mousePressed()
 {
-  if(elapsed > 12)
+  if(elapsed > 12 && gameOver==false)
   {
     Bullet bullet = new Bullet();
     gameObjects.add(bullet);
@@ -173,3 +175,15 @@ void checkCollisions()
     hit=false;
   }
 }//end checkCollisions
+
+void gameOver()
+{
+  textSize(32);
+  textAlign(CENTER,CENTER);
+  fill(237,28,36);
+  text("GAME OVER!", width*0.5f, height*0.5f - 50);
+  textSize(14);
+  fill(255);
+  text("Targets Destroyed : " + destroyed, (width*0.5f)+80, (height*0.5f)+50);
+  text("Time Elapsed : " + gameTimer/60, (width*0.5f)-80, (height*0.5f)+50);
+}

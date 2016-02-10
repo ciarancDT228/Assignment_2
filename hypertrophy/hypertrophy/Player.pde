@@ -9,11 +9,6 @@ class Player extends GameObject
     tempD = d;
   }
   
-  Player(float x, float y, float d)
-  {
-    super(x,y,d);
-  }
-
   void update()
   {
     theta = getTheta();
