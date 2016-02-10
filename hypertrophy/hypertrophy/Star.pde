@@ -9,7 +9,6 @@ class Star extends GameObject
     pos.x = width*0.5f;
     pos.y = height*0.5f;
     c = color(random(10,100));
-    //c = color(255);
     speed = 0.01f;
     d = 0.01f;
   }
@@ -31,7 +30,7 @@ class Star extends GameObject
     {
       gameEffects.remove(this);
     }
-    d*=1.02f;
+    d*=1.025f;
   }
   
 }

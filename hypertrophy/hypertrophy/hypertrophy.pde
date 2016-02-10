@@ -10,25 +10,6 @@ AudioPlayer pop;
 AudioPlayer audio;
 AudioPlayer soundTrack;
 
-void setup()
-{
-  minim = new Minim(this);
-  //fullScreen();
-  size(500,500);
-  background(0);
-  //Adding player object
-  Player player = new Player();
-  gameObjects.add(player);
-  //Instantiating audio files
-  shoot = minim.loadFile("shoot.wav");
-  pop = minim.loadFile("pop.wav");
-  audio = minim.loadFile("impact.wav");
-  audio.setGain(10);
-  soundTrack = minim.loadFile("tune2.mp3");
-  soundTrack.setGain(-6);
-  soundTrack.loop();
-}
-
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 //Seperate arraylist for effects/particles, to make object loops more efficient
 ArrayList<GameObject> gameEffects = new ArrayList<GameObject>();
@@ -47,17 +28,28 @@ boolean removeBullet = false;
 boolean gameOver = false;
 //Boolean used to count targets being destroyed. Have to use boolean to prevent same target getting counted twice
 boolean hit = false;
-/*boolean[] keys = new boolean[512];
 
-void keyPressed()
+void setup()
 {
-  keys[keyCode] = true;
+  minim = new Minim(this);
+  //fullScreen();
+  size(500,500);
+  background(0);
+  //Adding player object
+  Player player = new Player();
+  gameObjects.add(player);
+  //Instantiating audio files
+  shoot = minim.loadFile("shoot.wav");
+  pop = minim.loadFile("pop.wav");
+  audio = minim.loadFile("impact.wav");
+  audio.setGain(10);
+  soundTrack = minim.loadFile("tune2.mp3");
+  soundTrack.setGain(-2);
+  soundTrack.loop();
 }
 
-void keyReleased()
-{
-  keys[keyCode] = false;
-}*/
+
+
 
 void draw()
 {
